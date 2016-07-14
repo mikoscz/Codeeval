@@ -1,27 +1,54 @@
-#
-# (1..100).each do |x|
-#     if x % 5 == 0 && x % 3 == 0
-#         puts 'FizzBuzz'
-#     elsif x % 3 == 0
-#         puts 'Fizz'
-#     elsif x % 5 == 0
-#         puts 'Buzz'
-#     else
-#         puts x
-#     end
-# end
-
-line = '3 5 10'
+line = '3 5 15'
 
 class FizzBuzz
   def initialize(line)
     @line = line
   end
 
+  def to_s
+    number_range.join(' ')
+  end
+
+  private
+
+  def number_range
+    (1..range_number).map do |number|
+      if fizz?(number) && buzz?(number)
+        'FB'
+      elsif fizz?(number)
+        'F'
+      elsif buzz?(number)
+        'B'
+      else
+        number
+      end
+    end
+  end
+
   def splited_line
-    @line.split(' ')
+    @line.split(' ').map(&:to_i)
+  end
+
+  def first_divider
+    splited_line.first
+  end
+
+  def second_divider
+    splited_line[1]
+  end
+
+  def range_number
+    splited_line.last
+  end
+
+  def buzz?(number)
+    number % second_divider == 0
+  end
+
+  def fizz?(number)
+    number % first_divider == 0
   end
 end
 
 obj = FizzBuzz.new(line)
-p obj.splited_line
+puts obj
