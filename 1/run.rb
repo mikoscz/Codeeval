@@ -1,10 +1,6 @@
 line = '3 5 15'
 
-class FizzBuzz
-  def initialize(line)
-    @line = line
-  end
-
+class FizzBuzz < Struct.new(:line)
   def to_s
     number_range.join(' ')
   end
@@ -26,7 +22,7 @@ class FizzBuzz
   end
 
   def splited_line
-    @line.split(' ').map(&:to_i)
+    line.split(' ').map(&:to_i)
   end
 
   def first_divider
